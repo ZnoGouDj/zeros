@@ -22,7 +22,6 @@ function doubleFactCall(arr) {
   return arr.map(el => factorialDouble(BigInt(el.slice(0, el.length - 2))));
 }
 
-
 function countZeros(num) {
   let count = 0;
   while (num % 10n == 0) {
