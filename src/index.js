@@ -14,14 +14,13 @@ function factorialDouble(n) {
   return f;
 }
 
-function factCall(arr) {
-  return arr.map(el => factorial(BigInt(el.slice(0, el.length - 1))));
+function factCall(el) {
+  return factorial(BigInt(el.slice(0, el.length - 1)));
 }
 
-function doubleFactCall(arr) {
-  return arr.map(el => factorialDouble(BigInt(el.slice(0, el.length - 2))));
+function doubleFactCall(el) {
+  return factorialDouble(BigInt(el.slice(0, el.length - 2)));
 }
-
 
 function countZeros(num) {
   let count = 0;
@@ -34,7 +33,7 @@ function countZeros(num) {
 
 module.exports = function zeros(expression) {
   let exprArr = expression.split('*');
-  let doubleFactArr = doubleFactCall(exprArr.filter(el => el.endsWith('!!')));
-  let factArr = factCall(exprArr.filter(el => !el.endsWith('!!')));
-  return product = countZeros(doubleFactArr.concat(factArr).reduce((a, b) => a * b));
+  let doubleFactArr = exprArr.filter(el => el.endsWith('!!')).map(el => doubleFactCall(el));
+  let factArr = exprArr.filter(el => !el.endsWith('!!')).map(el => factCall(el));
+  return countZeros(doubleFactArr.concat(factArr).reduce((a, b) => a * b));
 }
